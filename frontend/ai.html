@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Intelligence | Cyber Command Center</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="layout-container">
+        <!-- Sidebar -->
+        <aside class="sidebar glass-panel">
+            <div class="brand">
+                <h1>SHIVAM <span>OS</span></h1>
+                <div class="brand-subtitle">Intelligence Command Center</div>
+            </div>
+            <nav class="nav-menu">
+                <a href="index.html" class="nav-item"><span class="nav-icon">⚡</span> Dashboard</a>
+                <a href="chains.html" class="nav-item"><span class="nav-icon">⚡</span> Attack Chains</a>
+                <a href="ai.html" class="nav-item active" style="color: var(--accent-purple); border-left-color: var(--accent-purple); background: rgba(176, 38, 255, 0.05);">
+                    <span class="nav-icon">🧠</span> AI Intelligence
+                </a>
+                <a href="report.html" class="nav-item">
+                    <span class="nav-icon">📊</span> Executive Report
+                </a>
+            </nav>
+            <div class="history-section">
+                <div style="padding: 20px; color: var(--text-secondary); font-size: 0.8rem; line-height: 1.5; border-bottom: 1px solid var(--border-color); margin-bottom: 20px;">
+                    <strong style="color: var(--accent-purple);">Gemma:2b Core</strong><br>
+                    Autonomous AI agent dedicated to deep forensic analysis, root cause discovery, and automated remediation.
+                </div>
+                
+                <h3>Scan History</h3>
+                <div id="target-list" class="target-list">
+                    <!-- Targets injected here -->
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Topbar -->
+            <header class="topbar glass-panel" style="border-bottom-color: rgba(176, 38, 255, 0.2);">
+                <div style="display: flex; gap: 20px; align-items: center;">
+                    <h2 style="color: var(--accent-purple); font-weight: 800; letter-spacing: 1px;">AI INTELLIGENCE CENTER</h2>
+                </div>
+                <div class="status-indicator">
+                    <div id="ai-core-status">
+                        <span class="status-text" style="color: var(--text-secondary);">Querying AI Core...</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Content -->
+            <div class="dashboard-wrapper">
+                <div class="intel-grid" style="grid-template-columns: 1fr 1fr;">
+                    <!-- Column 1: Vulnerability Forensic Analysis -->
+                    <div class="intel-col">
+                        <div class="intel-card glass-panel" style="border-color: rgba(176, 38, 255, 0.3);">
+                            <div class="card-header" style="background: rgba(176, 38, 255, 0.05);">
+                                <h3 style="color: var(--accent-purple);">🧠 Forensic Vulnerability Analysis</h3>
+                            </div>
+                            <div class="card-body scrollable" id="ai-vuln-list" style="padding: 20px; display: flex; flex-direction: column; gap: 20px;">
+                                <div class="empty-state">Loading AI forensics...</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Column 2: Source Code Disclosures -->
+                    <div class="intel-col">
+                        <div class="intel-card glass-panel" style="border-color: rgba(0, 230, 118, 0.3);">
+                            <div class="card-header" style="background: rgba(0, 230, 118, 0.05);">
+                                <h3 style="color: var(--accent-success);">📝 Source Code Context Audit</h3>
+                            </div>
+                            <div class="card-body scrollable" id="ai-code-list" style="padding: 20px; display: flex; flex-direction: column; gap: 20px;">
+                                <div class="empty-state">Loading Code Audits...</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="ai.js?v=1"></script>
+</body>
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cluster Infrastructure | Cyber Command Center</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        .cluster-node {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            transition: 0.3s;
+        }
+        .cluster-node:hover {
+            border-color: var(--accent-cyan);
+            background: rgba(0, 240, 255, 0.02);
+        }
+        .node-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(0, 240, 255, 0.1);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--accent-cyan);
+        }
+        .node-info { flex: 1; }
+        .node-status {
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+        .status-online { background: rgba(0, 230, 118, 0.1); color: var(--accent-success); }
+        .progress-bar {
+            height: 6px;
+            background: #222;
+            border-radius: 3px;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+        .progress-fill { height: 100%; background: var(--accent-cyan); transition: 0.5s; }
+    </style>
+</head>
+<body>
+    <div class="layout-container">
+        <!-- Sidebar -->
+        <aside class="sidebar glass-panel">
+            <div class="brand">
+                <h1>SHIVAM <span>OS</span></h1>
+                <div class="brand-subtitle">Intelligence Command Center</div>
+            </div>
+            <nav class="nav-menu">
+                <a href="index.html" class="nav-item"><span class="nav-icon">⚡</span> Dashboard</a>
+                <a href="chains.html" class="nav-item"><span class="nav-icon">⚡</span> Attack Chains</a>
+                <a href="ai.html" class="nav-item"><span class="nav-icon">🧠</span> AI Intelligence</a>
+                <a href="report.html" class="nav-item"><span class="nav-icon">📊</span> Executive Report</a>
+                <a href="advanced_reports.html" class="nav-item"><span class="nav-icon">📋</span> AI Reports Menu</a>
+                <a href="infrastructure.html" class="nav-item active" style="color:var(--accent-cyan); border-left-color:var(--accent-cyan); background:rgba(0,240,255,0.05);">
+                    <span class="nav-icon">🏗️</span> Cluster Monitor
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="topbar glass-panel">
+                <h2 style="color:var(--accent-cyan);">🏗️ INFRASTRUCTURE CLUSTER MONITOR</h2>
+                <div class="status-indicator">
+                    <span class="node-status status-online">CLUSTER HEALTH: OPTIMAL</span>
+                </div>
+            </header>
+
+            <div class="dashboard-wrapper">
+                <div class="metrics-grid">
+                    <div class="metric-card glass-panel">
+                        <div class="metric-value">04</div>
+                        <div class="metric-label">Active Nodes</div>
+                    </div>
+                    <div class="metric-card glass-panel">
+                        <div class="metric-value" style="color:var(--accent-success);">98%</div>
+                        <div class="metric-label">Uptime</div>
+                    </div>
+                    <div class="metric-card glass-panel">
+                        <div class="metric-value">142</div>
+                        <div class="metric-label">Tasks Executed</div>
+                    </div>
+                    <div class="metric-card glass-panel">
+                        <div class="metric-value" style="color:var(--accent-purple);">12ms</div>
+                        <div class="metric-label">Avg Latency</div>
+                    </div>
+                </div>
+
+                <h3 style="margin-top:20px; font-size:0.9rem; color:var(--text-secondary); text-transform:uppercase;">Node Distribution</h3>
+                
+                <div style="display:flex; flex-direction:column; gap:15px; margin-top:10px;">
+                    <!-- Node 1 -->
+                    <div class="cluster-node glass-panel">
+                        <div class="node-icon">📡</div>
+                        <div class="node-info">
+                            <div style="display:flex; justify-content:space-between; align-items:center;">
+                                <div style="font-weight:600;">Central-Worker-01 (Primary)</div>
+                                <span class="node-status status-online">ONLINE</span>
+                            </div>
+                            <div style="font-size:0.75rem; color:var(--text-secondary); margin-top:4px;">CPU: 12% | RAM: 1.2GB/16GB | OS: Ubuntu 22.04</div>
+                            <div class="progress-bar"><div class="progress-fill" style="width:12%;"></div></div>
+                        </div>
+                    </div>
+
+                    <!-- Node 2 -->
+                    <div class="cluster-node glass-panel">
+                        <div class="node-icon">📡</div>
+                        <div class="node-info">
+                            <div style="display:flex; justify-content:space-between; align-items:center;">
+                                <div style="font-weight:600;">Cloud-Edge-Virginia</div>
+                                <span class="node-status status-online">ONLINE</span>
+                            </div>
+                            <div style="font-size:0.75rem; color:var(--text-secondary); margin-top:4px;">CPU: 45% | RAM: 4.8GB/8GB | OS: Debian 11</div>
+                            <div class="progress-bar"><div class="progress-fill" style="width:45%;"></div></div>
+                        </div>
+                    </div>
+
+                    <!-- Node 3 -->
+                    <div class="cluster-node glass-panel" style="opacity:0.5;">
+                        <div class="node-icon" style="color:var(--text-secondary); background:rgba(255,255,255,0.05);">📡</div>
+                        <div class="node-info">
+                            <div style="display:flex; justify-content:space-between; align-items:center;">
+                                <div style="font-weight:600;">Local-Deep-Reasoning-Node</div>
+                                <span class="node-status" style="background:rgba(255,255,255,0.05); color:var(--text-secondary);">OFFLINE</span>
+                            </div>
+                            <div style="font-size:0.75rem; color:var(--text-secondary); margin-top:4px;">Last seen: 2 hours ago</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

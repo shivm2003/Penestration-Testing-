@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Executive Report | Cyber Command Center</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        @media print {
+            .sidebar, .topbar, .no-print { display: none !important; }
+            .layout-container { display: block; height: auto; }
+            .main-content { overflow: visible; background: #fff !important; color: #000 !important; }
+            .glass-panel { background: #fff !important; border: 1px solid #ddd !important; box-shadow: none !important; backdrop-filter: none !important; color: #000 !important; }
+            body { background: #fff; color: #000; overflow: auto; height: auto; }
+            h1, h2, h3, h4, .metric-value, .metric-label, .text-primary, .text-secondary { color: #000 !important; }
+            .badge-accent { border: 1px solid #000 !important; color: #000 !important; }
+        }
+    </style>
+</head>
+<body>
+    <div class="layout-container">
+        <!-- Sidebar -->
+        <aside class="sidebar glass-panel no-print">
+            <div class="brand">
+                <h1>SHIVAM <span>OS</span></h1>
+                <div class="brand-subtitle">Intelligence Command Center</div>
+            </div>
+            <nav class="nav-menu">
+                <a href="index.html" class="nav-item"><span class="nav-icon">⚡</span> Dashboard</a>
+                <a href="chains.html" class="nav-item"><span class="nav-icon">⚡</span> Attack Chains</a>
+                <a href="ai.html" class="nav-item"><span class="nav-icon">🧠</span> AI Intelligence</a>
+                <a href="report.html" class="nav-item active" style="color:var(--accent-success); border-left-color:var(--accent-success); background:rgba(0,230,118,0.05);">
+                    <span class="nav-icon">📊</span> Executive Report
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Topbar -->
+            <header class="topbar glass-panel no-print">
+                <div class="search-box">
+                    <select id="target-select" style="flex: 1; background: rgba(0,0,0,0.5); border: 1px solid var(--border-color); padding: 12px 16px; border-radius: 6px; color: #fff; font-size: 0.9rem; outline: none;">
+                        <option value="">Select a Target to Generate Report...</option>
+                    </select>
+                </div>
+                <div class="action-buttons">
+                    <button class="btn btn-primary" onclick="window.print()">🖨️ Print PDF</button>
+                    <button class="btn btn-launch" onclick="downloadJSON()">💾 Download JSON</button>
+                </div>
+            </header>
+
+            <!-- Dashboard Content -->
+            <div class="dashboard-wrapper" id="report-content" style="display: none; padding-bottom: 60px;">
+                <!-- Header -->
+                <div style="text-align: center; margin-bottom: 30px; border-bottom: 2px solid var(--border-color); padding-bottom: 20px;">
+                    <h1 style="font-size: 2.5rem; letter-spacing: 2px; margin-bottom: 10px;">EXECUTIVE SECURITY BRIEFING</h1>
+                    <div style="color: var(--text-secondary); font-size: 1.1rem;" id="report-target-url"></div>
+                    <div style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 5px;" id="report-date"></div>
+                </div>
+
+                <!-- Global Risk Rating -->
+                <div class="control-panel glass-panel" style="display: flex; align-items: center; justify-content: center; gap: 40px; padding: 40px;">
+                    <div style="text-align: right;">
+                        <h2 style="font-size: 1.2rem; color: var(--text-secondary); text-transform: uppercase;">Global Security Risk Rating</h2>
+                        <p style="font-size: 0.9rem; color: #888; max-width: 300px; margin-top: 10px;">Calculated based on attack surface exposure and verified vulnerability severity.</p>
+                    </div>
+                    <div id="risk-grade" style="font-size: 6rem; font-weight: 800; line-height: 1; text-shadow: 0 0 30px currentColor;">
+                        A
+                    </div>
+                </div>
+
+                <!-- Metrics Overview -->
+                <section class="metrics-grid">
+                    <div class="metric-card glass-panel">
+                        <div class="metric-value text-danger" id="rep-critical">0</div>
+                        <div class="metric-label">Critical Vulns</div>
+                    </div>
+                    <div class="metric-card glass-panel">
+                        <div class="metric-value text-warning" id="rep-high">0</div>
+                        <div class="metric-label">High Vulns</div>
+                    </div>
+                    <div class="metric-card glass-panel">
+                        <div class="metric-value text-success" id="rep-medlow">0</div>
+                        <div class="metric-label">Med/Low Vulns</div>
+                    </div>
+                    <div class="metric-card glass-panel">
+                        <div class="metric-value text-critical" id="rep-chains">0</div>
+                        <div class="metric-label">Attack Chains</div>
+                    </div>
+                    <div class="metric-card glass-panel">
+                        <div class="metric-value" id="rep-surface">0</div>
+                        <div class="metric-label">Attack Surface Assets</div>
+                    </div>
+                </section>
+
+                <!-- Detailed Breakdown -->
+                <div style="display: flex; flex-direction: column; gap: 20px;">
+                    <!-- Vulnerabilities Summary -->
+                    <div class="glass-panel" style="padding: 24px; border-radius: 12px;">
+                        <h3 style="border-bottom: 1px solid var(--border-color); padding-bottom: 10px; margin-bottom: 20px;">Vulnerability Summary</h3>
+                        <div id="report-vulns" style="display: flex; flex-direction: column; gap: 10px;"></div>
+                    </div>
+
+                    <!-- Defensive Topology Summary -->
+                    <div class="glass-panel" style="padding: 24px; border-radius: 12px; border-left: 5px solid var(--accent-success);">
+                        <h3 style="border-bottom: 1px solid var(--border-color); padding-bottom: 10px; margin-bottom: 20px; color: var(--accent-success);">Defensive Topology Profile</h3>
+                        <div id="report-defensive" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;"></div>
+                    </div>
+
+                    <!-- Red Team Impact Analysis -->
+                    <div class="glass-panel" style="padding: 24px; border-radius: 12px; border-left: 5px solid var(--accent-danger);">
+                        <h3 style="border-bottom: 1px solid var(--border-color); padding-bottom: 10px; margin-bottom: 20px; color: var(--accent-danger);">Red Team: Blast Radius & Impact</h3>
+                        <div id="report-redteam" style="display: flex; flex-direction: column; gap: 15px;"></div>
+                    </div>
+
+                    <!-- Attack Chains Summary -->
+                    <div class="glass-panel" style="padding: 24px; border-radius: 12px;">
+                        <h3 style="border-bottom: 1px solid var(--border-color); padding-bottom: 10px; margin-bottom: 20px; color: var(--accent-critical);">Verified Attack Chains</h3>
+                        <div id="report-chains" style="display: flex; flex-direction: column; gap: 10px;"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="empty-prompt" style="flex: 1; display: flex; align-items: center; justify-content: center; color: var(--text-secondary); font-size: 1.2rem;">
+                Select a target from the dropdown above to view the Executive Report.
+            </div>
+        </main>
+    </div>
+    <script src="report.js"></script>
+</body>
+</html>

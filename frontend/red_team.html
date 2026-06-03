@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Red Team Blast Radius | Cyber Command Center</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        .topology-container {
+            height: 600px;
+            background: rgba(0,0,0,0.2);
+            border-radius: 12px;
+            border: 1px solid rgba(255,42,85,0.1);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .node {
+            width: 120px;
+            padding: 15px;
+            background: var(--bg-panel);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            text-align: center;
+            position: absolute;
+            transition: 0.3s;
+            cursor: pointer;
+            z-index: 2;
+        }
+        .node:hover {
+            border-color: var(--accent-danger);
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(255,42,85,0.2);
+        }
+        .node-compromised {
+            border-color: var(--accent-danger);
+            background: rgba(255,42,85,0.05);
+        }
+        .connection-line {
+            position: absolute;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent-danger), transparent);
+            z-index: 1;
+            transform-origin: left center;
+        }
+        .blast-ring {
+            position: absolute;
+            border-radius: 50%;
+            border: 2px dashed rgba(255,42,85,0.1);
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="layout-container">
+        <!-- Sidebar -->
+        <aside class="sidebar glass-panel">
+            <div class="brand">
+                <h1>SHIVAM <span>OS</span></h1>
+                <div class="brand-subtitle">Intelligence Command Center</div>
+            </div>
+            <nav class="nav-menu">
+                <a href="index.html" class="nav-item"><span class="nav-icon">⚡</span> Dashboard</a>
+                <a href="chains.html" class="nav-item"><span class="nav-icon">⚡</span> Attack Chains</a>
+                <a href="ai.html" class="nav-item"><span class="nav-icon">🧠</span> AI Intelligence</a>
+                <a href="red_team.html" class="nav-item active" style="color:var(--accent-danger); border-left-color:var(--accent-danger); background:rgba(255,42,85,0.05);">
+                    <span class="nav-icon">🎯</span> Red Team Map
+                </a>
+                <a href="report.html" class="nav-item"><span class="nav-icon">📊</span> Executive Report</a>
+                <a href="advanced_reports.html" class="nav-item"><span class="nav-icon">📋</span> AI Reports Menu</a>
+                <a href="infrastructure.html" class="nav-item"><span class="nav-icon">🏗️</span> Cluster Monitor</a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="topbar glass-panel">
+                <h2 style="color:var(--accent-danger);">🎯 RED TEAM BLAST RADIUS MAP</h2>
+                <div class="status-indicator" style="background:rgba(255,42,85,0.1); color:var(--accent-danger); border:1px solid var(--accent-danger); padding:4px 12px; border-radius:4px; font-size:0.75rem; font-weight:800;">
+                    LIVE EXPLOITATION DEPTH: LEVEL 3 (INTERNAL)
+                </div>
+            </header>
+
+            <div class="dashboard-wrapper">
+                <div class="topology-container">
+                    <!-- Blast Rings -->
+                    <div class="blast-ring" style="width:200px; height:200px;"></div>
+                    <div class="blast-ring" style="width:400px; height:400px;"></div>
+                    <div class="blast-ring" style="width:600px; height:600px;"></div>
+
+                    <!-- Nodes -->
+                    <div class="node" style="top: 250px; left: 50px;">
+                        <div style="font-size:1.5rem;">🌎</div>
+                        <div style="font-size:0.7rem; margin-top:5px; font-weight:700;">PUBLIC INTERNET</div>
+                    </div>
+
+                    <div class="node node-compromised" style="top: 250px; left: 250px;">
+                        <div style="font-size:1.5rem;">💻</div>
+                        <div style="font-size:0.7rem; margin-top:5px; font-weight:700; color:var(--accent-danger);">APP SERVER</div>
+                        <div style="font-size:0.6rem; color:var(--text-secondary);">Entry Point: SSRF</div>
+                    </div>
+
+                    <div class="node" style="top: 150px; left: 500px; border-style:dashed;">
+                        <div style="font-size:1.5rem;">💾</div>
+                        <div style="font-size:0.7rem; margin-top:5px; font-weight:700;">INTERNAL DB</div>
+                        <div style="font-size:0.6rem; color:var(--text-secondary);">Target: Lateral</div>
+                    </div>
+
+                    <div class="node node-compromised" style="top: 350px; left: 500px;">
+                        <div style="font-size:1.5rem;">☁️</div>
+                        <div style="font-size:0.7rem; margin-top:5px; font-weight:700; color:var(--accent-danger);">CLOUD METADATA</div>
+                        <div style="font-size:0.6rem; color:var(--text-secondary);">Status: COMPROMISED</div>
+                    </div>
+
+                    <!-- Connections (Static for mockup) -->
+                    <div class="connection-line" style="top:275px; left:170px; width:80px;"></div>
+                    <div class="connection-line" style="top:275px; left:370px; width:130px; transform:rotate(-35deg);"></div>
+                    <div class="connection-line" style="top:275px; left:370px; width:130px; transform:rotate(35deg);"></div>
+                </div>
+
+                <div class="intel-grid" style="margin-top:20px;">
+                    <div class="intel-card glass-panel">
+                        <h3>Critical Escalation Paths</h3>
+                        <div style="display:flex; flex-direction:column; gap:10px; margin-top:10px;">
+                            <div class="list-item" style="border-left:3px solid var(--accent-danger);">
+                                <div style="font-weight:700; color:var(--accent-danger);">Path: Public -> App -> Metadata</div>
+                                <div style="font-size:0.8rem; color:var(--text-secondary);">Impact: IAM Role credential theft (AdministratorAccess potential).</div>
+                            </div>
+                            <div class="list-item" style="border-left:3px solid var(--accent-warning);">
+                                <div style="font-weight:700; color:var(--accent-warning);">Path: App -> Persistence (.env)</div>
+                                <div style="font-size:0.8rem; color:var(--text-secondary);">Impact: Hardcoded DB credentials lead to database takeover.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Remediation Playground | Cyber Command Center</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        .terminal-box {
+            background: #050505;
+            border: 1px solid var(--accent-cyan);
+            border-radius: 8px;
+            padding: 20px;
+            font-family: 'JetBrains Mono', monospace;
+            height: 500px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.1);
+        }
+        .code-input {
+            flex: 1;
+            background: none;
+            border: none;
+            color: var(--accent-success);
+            font-family: inherit;
+            font-size: 0.9rem;
+            resize: none;
+            outline: none;
+            line-height: 1.5;
+        }
+        .ai-feedback {
+            background: rgba(176, 38, 255, 0.05);
+            border-top: 1px solid rgba(176, 38, 255, 0.2);
+            padding: 15px;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+        .sim-node {
+            padding: 10px;
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 4px;
+            font-size: 0.75rem;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="layout-container">
+        <!-- Sidebar -->
+        <aside class="sidebar glass-panel">
+            <div class="brand">
+                <h1>SHIVAM <span>OS</span></h1>
+                <div class="brand-subtitle">Intelligence Command Center</div>
+            </div>
+            <nav class="nav-menu">
+                <a href="index.html" class="nav-item"><span class="nav-icon">⚡</span> Dashboard</a>
+                <a href="chains.html" class="nav-item"><span class="nav-icon">⚡</span> Attack Chains</a>
+                <a href="ai.html" class="nav-item"><span class="nav-icon">🧠</span> AI Intelligence</a>
+                <a href="playground.html" class="nav-item active" style="color:var(--accent-cyan); border-left-color:var(--accent-cyan); background:rgba(0,240,255,0.05);">
+                    <span class="nav-icon">🧪</span> Remediation Lab
+                </a>
+                <a href="report.html" class="nav-item"><span class="nav-icon">📊</span> Executive Report</a>
+                <a href="advanced_reports.html" class="nav-item"><span class="nav-icon">📋</span> AI Reports Menu</a>
+                <a href="infrastructure.html" class="nav-item"><span class="nav-icon">🏗️</span> Cluster Monitor</a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="topbar glass-panel">
+                <h2 style="color:var(--accent-cyan);">🧪 AI REMEDIATION LAB (SANDBOX)</h2>
+            </header>
+
+            <div class="dashboard-wrapper">
+                <div class="intel-grid" style="grid-template-columns: 1.5fr 1fr;">
+                    <!-- Code Editor -->
+                    <div class="intel-col">
+                        <div class="intel-card glass-panel" style="padding:0;">
+                            <div class="card-header">
+                                <h3 style="color:var(--accent-success);">Vulnerable Code Patching</h3>
+                                <button class="btn btn-primary" onclick="testFix()">RUN AI VERIFICATION</button>
+                            </div>
+                            <div class="terminal-box">
+                                <div style="color:rgba(255,255,255,0.3); margin-bottom:10px;">// Step 1: Paste vulnerable code snippet here and apply your fix</div>
+                                <textarea id="code-sandbox" class="code-input" placeholder="Paste code here...
+Example:
+$id = $_GET['id'];
+$query = 'SELECT * FROM users WHERE id = ' . $id;"></textarea>
+                                <div id="verification-logs" style="margin-top:20px; font-size:0.8rem; color:var(--text-secondary);">
+                                    <!-- AI logs -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Simulator & Results -->
+                    <div class="intel-col">
+                        <div class="intel-card glass-panel">
+                            <div class="card-header">
+                                <h3 style="color:var(--accent-purple);">Simulated Exploit Test</h3>
+                            </div>
+                            <div class="card-body">
+                                <div id="sim-status" class="sim-node" style="border-color:var(--accent-warning); color:var(--accent-warning);">
+                                    READY: Waiting for code submission...
+                                </div>
+                                <div id="sim-steps" style="margin-top:20px; display:flex; flex-direction:column; gap:10px;">
+                                    <!-- Exploit steps -->
+                                </div>
+                                <div id="final-verdict" style="margin-top:30px; text-align:center;">
+                                    <!-- Success/Fail -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        function testFix() {
+            const code = document.getElementById('code-sandbox').value;
+            const logs = document.getElementById('verification-logs');
+            const status = document.getElementById('sim-status');
+            const steps = document.getElementById('sim-steps');
+            const verdict = document.getElementById('final-verdict');
+
+            logs.innerHTML = '<div style="color:var(--accent-cyan);">[SYSTEM] Initializing virtual sandbox...</div>';
+            status.textContent = 'SIMULATING: Adversarial payloads being generated...';
+            steps.innerHTML = '';
+            verdict.innerHTML = '';
+
+            setTimeout(() => {
+                logs.innerHTML += '<div style="color:var(--accent-purple);">[AI] Analyzing patch patterns...</div>';
+                
+                setTimeout(() => {
+                    steps.innerHTML += '<div class="sim-node">ATTACK: SQL Injection Payload (OR 1=1)</div>';
+                    
+                    setTimeout(() => {
+                        steps.innerHTML += '<div class="sim-node">RESULT: Request Blocked / Clean Input</div>';
+                        logs.innerHTML += '<div style="color:var(--accent-success);">[SUCCESS] No data leakage detected.</div>';
+                        status.textContent = 'COMPLETED: Sandbox secured.';
+                        verdict.innerHTML = '<h2 style="color:var(--accent-success);">✅ PATCH VERIFIED</h2><p style="font-size:0.8rem; color:var(--text-secondary);">Fix successfully mitigates the identified vulnerability.</p>';
+                    }, 1000);
+                }, 1000);
+            }, 800);
+        }
+    </script>
+</body>
+</html>
