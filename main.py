@@ -3,7 +3,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
 from sqlalchemy.orm import selectinload
 import models, schemas
-from database import engine, get_db, Base
+from database import engine, get_db, Base, ensure_database_exists
 from agents.recon import start_recon
 from agents.scanner import start_scan
 from agents.validator import start_validate
@@ -22,7 +22,8 @@ load_dotenv()
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    # Initialize DB on startup
+    # Ensure the configured DB exists, then initialize schema
+    await ensure_database_exists()
     async with engine.begin() as conn:
         # await conn.run_sync(Base.metadata.drop_all) # DANGER: DO NOT DROP IN PRODUCTION/HISTORY MODE
         await conn.run_sync(Base.metadata.create_all)

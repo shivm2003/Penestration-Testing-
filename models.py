@@ -14,7 +14,7 @@ class Target(Base):
 
     recon_data = relationship("ReconData", back_populates="target", cascade="all, delete-orphan")
     vulnerabilities = relationship("Vulnerability", back_populates="target", cascade="all, delete-orphan")
-    orchestrator_states = relationship("OrchestratorState", cascade="all, delete-orphan")
+    orchestrator_states = relationship("OrchestratorState", back_populates="target", cascade="all, delete-orphan")
     code_reviews = relationship("CodeReview", cascade="all, delete-orphan")
     chain_findings = relationship("ChainFinding", cascade="all, delete-orphan")
     brute_findings = relationship("BruteFinding", cascade="all, delete-orphan")
@@ -75,7 +75,7 @@ class OrchestratorState(Base):
     result_summary = Column(Text, nullable=True) # E.g., 'Redirected to /dashboard' or '403 Forbidden'
     created_at = Column(DateTime(timezone=True), server_default=func.now())
 
-    target = relationship("Target")
+    target = relationship("Target", back_populates="orchestrator_states")
 
 class CodeReview(Base):
     __tablename__ = "code_reviews"

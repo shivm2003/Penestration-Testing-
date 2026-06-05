@@ -8,7 +8,7 @@ def create_db():
     password = "Shivraj@123456"
     host = "127.0.0.1"
     port = "5432"
-    db_name = "Vulnerability_Scanner"
+    db_name = "vulnerability_scanner"
 
     try:
         # Connect to default postgres database

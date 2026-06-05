@@ -8,7 +8,7 @@ load_dotenv()
 async def create_db():
     # Use the postgres default database to connect and create the new one
     conn_str = "postgresql://postgres:Shivraj%40123456@127.0.0.1:5432/postgres"
-    db_name = "Vulnerability_Scanner"
+    db_name = "vulnerability_scanner"
     
     try:
         conn = await asyncpg.connect(conn_str)

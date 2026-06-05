@@ -12,9 +12,9 @@ def recreate_db():
     cur = con.cursor()
     
     # Terminate other connections if any
-    cur.execute("SELECT pg_terminate_backend(pg_stat_activity.pid) FROM pg_stat_activity WHERE pg_stat_activity.datname = 'Vulnerability_Scanner' AND pid <> pg_backend_pid();")
+    cur.execute("SELECT pg_terminate_backend(pg_stat_activity.pid) FROM pg_stat_activity WHERE pg_stat_activity.datname = 'vulnerability_scanner' AND pid <> pg_backend_pid();")
     
-    cur.execute('DROP DATABASE IF EXISTS "Vulnerability_Scanner"')
+    cur.execute('DROP DATABASE IF EXISTS "vulnerability_scanner"')
     cur.execute('CREATE DATABASE vulnerability_scanner')
     print("Database recreated as 'vulnerability_scanner'")
     
