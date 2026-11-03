@@ -58,7 +58,7 @@ Vulnerability Discovery:
 """
                 try:
                     response = await self.client.post(self.ollama_url, json={
-                        "model": "gemma:2b",
+                        "model": "gemma4:e4b",
                         "prompt": prompt,
                         "stream": False
                     })
@@ -169,7 +169,7 @@ REASON: [one sentence explaining your confidence level]
 """
         try:
             response = await self.client.post(self.ollama_url, json={
-                "model": "gemma:2b",
+                "model": "gemma4:e4b",
                 "prompt": review_prompt,
                 "stream": False
             })
@@ -293,7 +293,7 @@ Vulnerability Context:
     try:
         async with httpx.AsyncClient(timeout=600.0, verify=False) as client:
             response = await client.post(ollama_url, json={
-                "model": "gemma:2b",
+                "model": "gemma4:e4b",
                 "prompt": prompt,
                 "stream": False
             })

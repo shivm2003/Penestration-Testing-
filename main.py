@@ -1,4 +1,5 @@
 from fastapi import FastAPI, Depends, BackgroundTasks, HTTPException, Query
+from sqlalchemy.exc import IntegrityError
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
 from sqlalchemy.orm import selectinload
@@ -43,7 +44,13 @@ app.add_middleware(
 async def create_target(target: schemas.TargetCreate, db: AsyncSession = Depends(get_db)):
     db_target = models.Target(url=target.url)
     db.add(db_target)
-    await db.commit()
+    try:
+        await db.commit()
+    except IntegrityError as exc:
+        await db.rollback()
+        if "ix_targets_url" in str(exc.orig) or "duplicate key value violates unique constraint" in str(exc.orig).lower():
+            raise HTTPException(status_code=409, detail="Target with this URL already exists") from exc
+        raise
     await db.refresh(db_target)
     return db_target
 
@@ -237,10 +244,10 @@ async def get_ai_status():
         async with httpx.AsyncClient(timeout=2.0) as client:
             resp = await client.get(base_url)
             if resp.status_code == 200:
-                return {"status": "online", "model": "gemma:2b"}
+                return {"status": "online", "model": "gemma4:e4b"}
     except:
         pass
-    return {"status": "offline", "model": "gemma:2b"}
+    return {"status": "offline", "model": "gemma4:e4b"}
 
 @app.get("/api/ai/reports")
 async def get_ai_reports(db: AsyncSession = Depends(get_db)):

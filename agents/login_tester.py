@@ -14,7 +14,7 @@ from core.request_builder import RequestTemplate
 from core.session_manager import AuthSession
 
 OLLAMA_BASE_URL = os.getenv("OLLAMA_BASE_URL", "http://127.0.0.1:11434")
-OLLAMA_MODEL    = os.getenv("OLLAMA_MODEL", "gemma:2b")
+OLLAMA_MODEL    = os.getenv("OLLAMA_MODEL", "gemma4:e4b")
 
 BASELINE_PAYLOADS = {
     "sqli":         ["' OR '1'='1", "' OR 1=1--", "admin'--", "' UNION SELECT null,null--"],

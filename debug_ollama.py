@@ -13,8 +13,8 @@ async def test():
                 if tags_resp.status_code == 200:
                     models = [m['name'] for m in tags_resp.json().get('models', [])]
                     print(f"Available models: {models}")
-                    if "gemma:2b" not in models and "gemma:2b:latest" not in models:
-                        print("WARNING: gemma:2b not found! run 'ollama pull gemma:2b'")
+                    if "gemma4:e4b" not in models and "gemma4:e4b:latest" not in models:
+                        print("WARNING: gemma4:e4b not found! run 'ollama pull gemma4:e4b'")
                 else:
                     print(f"Could not fetch tags from {tags_url}")
 
@@ -22,7 +22,7 @@ async def test():
             print(f"Testing generation (timeout=120s)...")
             async with httpx.AsyncClient(timeout=120.0) as client:
                 resp = await client.post(url, json={
-                    "model": "gemma:2b",
+                    "model": "gemma4:e4b",
                     "prompt": "hi",
                     "stream": False
                 })

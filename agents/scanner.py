@@ -361,7 +361,7 @@ Example: {{"username": "admin", "password": "' OR 1=1--"}}
             base_url = os.getenv("OLLAMA_BASE_URL", "http://127.0.0.1:11434")
             # Using 120s timeout as models can be slow to load
             ai_resp = await httpx.AsyncClient(timeout=300.0, verify=False).post(f"{base_url}/api/generate", json={
-                "model": "gemma:2b",
+                "model": "gemma4:e4b",
                 "prompt": prompt,
                 "stream": False
             })

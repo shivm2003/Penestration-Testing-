@@ -62,10 +62,10 @@ Analyze for:
 Respond with a concise bulleted summary of findings.
 """
         try:
-            # Use gemma:2b for speed
+            # Use gemma4:e4b for speed
             async with httpx.AsyncClient(timeout=120.0) as ai_client:
                 resp = await ai_client.post(self.ollama_url, json={
-                    "model": "gemma:2b",
+                    "model": "gemma4:e4b",
                     "prompt": prompt,
                     "stream": False
                 })

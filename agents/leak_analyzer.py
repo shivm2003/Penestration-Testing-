@@ -22,7 +22,7 @@ from agents.utils import log_event
 from typing import List, Dict, Optional
 
 OLLAMA_BASE_URL = os.getenv("OLLAMA_BASE_URL", "http://127.0.0.1:11434")
-OLLAMA_MODEL    = os.getenv("OLLAMA_MODEL", "gemma:2b")
+OLLAMA_MODEL    = os.getenv("OLLAMA_MODEL", "gemma4:e4b")
 
 # ─────────────────────────────────────────────────────────────────────────────
 # Compiled regex patterns
